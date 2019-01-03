@@ -1,6 +1,7 @@
 package com.theoxao.maikan.web
 
 import android.util.Log.d
+import com.theoxao.maikan.constant.Routers
 import com.theoxao.maikan.mvp.BaseCallback
 import com.theoxao.maikan.mvp.MultiResultCallback
 import com.theoxao.maikan.utils.AppUtils
@@ -12,20 +13,10 @@ import java.io.IOException
 
 class HttpModel {
     private var CLIENT = OkHttpClient.Builder().build()
-    private val PRODUCT = "11"
-    private val CHANNEL = "0"
+    private var TOKEN = "70843bc3-794a-4d99-a05a-c4e6487036bd"
 
     fun getAnonymous(url: String, baseCallback: BaseCallback) {
         d("request {} now", url)
-        val type = getType(url)
-        if (type != 0) {
-            val cache = CacheUtil.instance.get(url)
-            if (cache != null) {
-                d(this.javaClass.name, "load data from cache")
-                AppUtils.runOnUI { baseCallback.onSuccess(cache) }
-                return
-            }
-        }
         val request = requestBuilder(url).build()
         CLIENT.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
@@ -37,10 +28,8 @@ class HttpModel {
             override fun onResponse(call: Call?, response: Response?) {
                 val node = ObjectMapperUtils.objectMapper.readTree(response?.body()!!.string())
                 val status = node.get("status").asInt()
-                val cache = CacheUtil.instance
                 when (status) {
                     200 -> {
-                        cache.put(url, node.get("data").toString(), type)
                         AppUtils.runOnUI { baseCallback.onSuccess(node.get("data").toString()) }
                     }
                     500 -> AppUtils.runOnUI { baseCallback.onFailure("服务器内部出错...") }
@@ -52,30 +41,17 @@ class HttpModel {
 
     @Deprecated("unused")
     fun getAuthorize(url: String, callback: BaseCallback) {
-        d("request {} now ", url)
-        val type = getType(url)
-        if (type != 0) {
-            val cache = CacheUtil.instance.get(url)
-            if (cache != null) {
-                d(this.javaClass.name, "load data from cache")
-                AppUtils.runOnUI { callback.onSuccess(cache) }
-                return
-            }
-        }
         val request = requestBuilder(url).build()
         CLIENT.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
                 AppUtils.runOnUI { callback.onError() }
             }
-
             override fun onResponse(call: Call?, response: Response?) {
                 try {
                     val node = ObjectMapperUtils.objectMapper.readTree(response?.body()!!.string())
                     val status = node.get("status").asInt()
-                    val cache = CacheUtil.instance
                     when (status) {
                         200 -> {
-                            cache.put(url, node.get("data").toString(), type)
                             AppUtils.runOnUI { callback.onSuccess(node.get("data").toString()) }
                         }
                         500 -> AppUtils.runOnUI { callback.onFailure("服务器内部出错了") }
@@ -97,30 +73,18 @@ class HttpModel {
 
     fun getWithUrl(url: String, target: String?, callback: MultiResultCallback) {
         d("request {} now ", url)
-        val type = getType(url)
-//        if (type != 0) {
-//            val cache = CacheUtil.instance.get(url)
-//            if (cache != null) {
-//                d(this.javaClass.name, "load data from cache")
-//                AppUtils.runOnUI { callback.onSuccess(target ?: url, cache) }
-//                return
-//            }
-//        }
         val request = requestBuilder(url).build()
         CLIENT.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
                 AppUtils.runOnUI { callback.onError() }
                 AppUtils.runOnUI { callback.onComplete() }
             }
-
             override fun onResponse(call: Call?, response: Response?) {
                 try {
                     val node = ObjectMapperUtils.objectMapper.readTree(response?.body()!!.string())
                     val status = node.get("status").asInt()
-                    val cache = CacheUtil.instance
                     when (status) {
                         200 -> AppUtils.runOnUI {
-                            //                            cache.put(url, node.get("data").toString(), type)
                             callback.onSuccess(target ?: url, node.get("data").toString())
                         }
                         500 -> AppUtils.runOnUI {
@@ -147,30 +111,18 @@ class HttpModel {
 
     fun postDataAsync(url: String, params: Map<String, String>?, target: String?, callback: MultiResultCallback) {
         d("posting to  {} now ", url)
-        val type = getType(url)
-        if (type != 0) {
-            val cache = CacheUtil.instance.get(url)
-            if (cache != null) {
-                d(this.javaClass.name, "load data from cache")
-                AppUtils.runOnUI { callback.onSuccess(target ?: url, cache) }
-                return
-            }
-        }
         val request = requestBuilder(url).post(setRequestBody(params)).build()
         CLIENT.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
                 AppUtils.runOnUI { callback.onError() }
                 AppUtils.runOnUI { callback.onComplete() }
             }
-
             override fun onResponse(call: Call?, response: Response?) {
                 try {
                     val node = ObjectMapperUtils.objectMapper.readTree(response?.body()!!.string())
                     val status = node.get("status").asInt()
-                    val cache = CacheUtil.instance
                     when (status) {
                         200 -> AppUtils.runOnUI {
-                            cache.put(url, node.get("data").toString(), type)
                             callback.onSuccess(target ?: url, node.get("data").toString())
                         }
                         500 -> AppUtils.runOnUI {
@@ -195,7 +147,7 @@ class HttpModel {
     }
 
     private fun requestBuilder(url: String): Request.Builder {
-        return Request.Builder().url(url)
+        return Request.Builder().addHeader("token", TOKEN).url("${Routers.host}$url")
     }
 
     private fun setRequestBody(BodyParams: Map<String, String>?): RequestBody {
@@ -205,7 +157,7 @@ class HttpModel {
             var key: String
             while (iterator.hasNext()) {
                 key = iterator.next()
-                formEncodingBuilder.add(key, BodyParams[key])
+                formEncodingBuilder.add(key, BodyParams[key]!!)
                 d("post http", "post_Params===" + key + "====" + BodyParams[key])
             }
         }

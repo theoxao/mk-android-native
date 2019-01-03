@@ -39,10 +39,10 @@ class PicassoImageLoader() : ImageLoader() {
                     else if (StringUtils.isNoneEmpty(path))
                         realPath = path
                     Picasso.with(context).load(realPath
-                            ?: "123").placeholder(R.drawable.def_avatar).error(R.drawable.def_avatar).into(imageView)
+                            ?: "123").placeholder(R.drawable.mk).error(R.drawable.mk).into(imageView)
                 }
                 is Int -> {
-                    Picasso.with(context).load(path).placeholder(R.drawable.def_avatar).error(R.drawable.def_avatar).into(imageView)
+                    Picasso.with(context).load(path).placeholder(R.drawable.mk).error(R.drawable.mk).into(imageView)
                 }
             }
         }
@@ -59,11 +59,11 @@ class PicassoImageLoader() : ImageLoader() {
                     else if (StringUtils.isNoneEmpty(path))
                         realPath = path
                     Picasso.with(context).load(realPath
-                            ?: "123").placeholder(R.drawable.def_avatar).error(R.drawable.def_avatar).fit()
+                            ?: "123").placeholder(R.drawable.mk).error(R.drawable.mk).fit()
                             .transform(CropCircleTransformation()).into(avatarView)
                 }
                 is Int -> {
-                    Picasso.with(context).load(path).placeholder(R.drawable.def_avatar).error(R.drawable.def_avatar).fit()
+                    Picasso.with(context).load(path).placeholder(R.drawable.mk).error(R.drawable.mk).fit()
                             .transform(CropCircleTransformation()).into(avatarView)
                 }
             }

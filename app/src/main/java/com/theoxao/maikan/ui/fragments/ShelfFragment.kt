@@ -4,26 +4,25 @@ package com.theoxao.maikan.ui.fragments
 import android.Manifest
 import android.app.Activity
 import android.app.Activity.RESULT_OK
-import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-
-import com.theoxao.maikan.R
-import com.theoxao.maikan.mvp.MultiResultFragment
-import com.theoxao.maikan.MainActivity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log.d
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.theoxao.maikan.R
+import com.theoxao.maikan.constant.Routers
+import com.theoxao.maikan.model.Tag
 import com.theoxao.maikan.mvp.MultiPresenter
-import com.theoxao.maikan.utils.ObjectMapperUtils
+import com.theoxao.maikan.mvp.MultiResultFragment
+import com.theoxao.maikan.ui.activities.AddBookActivity
 import com.theoxao.maikan.utils.ObjectMapperUtils.Companion.objectMapper
 import com.theoxao.maikan.utils.PicassoImageLoader
 import com.xys.libzxing.zxing.activity.CaptureActivity
@@ -52,29 +51,24 @@ class ShelfFragment : MultiResultFragment() {
                 if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(context as Activity,
                             arrayOf(Manifest.permission.CAMERA),
-                            2);
+                            2)
                 } else {
-                    showToast("权限已申请");
+                    showToast("权限已申请")
                 }
             }
-
             val openCameraIntent = Intent(context, CaptureActivity::class.java)
             startActivityForResult(openCameraIntent, 0)
         }
+        presenter.requestData(Routers.TAGLIST, null)
         return view
     }
 
     override fun onSuccess(target: String, data: String) {
         d(this.javaClass.name, data)
         when (target) {
-            "isbn" -> {
-                val node = objectMapper.readTree(data)
-                val cover = node.get(0).get("cover").asText()
-                PicassoImageLoader().displayImage(context, cover, coverView)
-                val name = node.get(0).get("name").asText()
-                nameView.text = name
-                val publisher = node.get(0).get("publisher").asText()
-                publisherView.text = publisher
+            Routers.TAGLIST -> {
+                val tags = objectMapper.readValue<ArrayList<Tag>>(data, objectMapper.typeFactory.constructCollectionType(ArrayList::class.java, Tag::class.java))
+                tags.forEach { println(it.tag) }
             }
         }
     }
@@ -85,7 +79,9 @@ class ShelfFragment : MultiResultFragment() {
             if (data == null)
                 return
             val isbn = data.extras.getString("result")
-            presenter.requestData("http://www.theoxao.com:8888/read/book/isbn/" + isbn, "isbn")
+            val intent = Intent(context, AddBookActivity::class.java)
+            intent.putExtra("isbn", isbn)
+            startActivity(intent)
         }
     }
 }
