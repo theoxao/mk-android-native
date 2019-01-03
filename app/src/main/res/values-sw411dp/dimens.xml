@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+    <dimen name="common_elevation">4.5667dp</dimen>
     <dimen name="dp_m_60">-68.5000dp</dimen>
     <dimen name="dp_m_30">-34.2500dp</dimen>
     <dimen name="dp_m_20">-22.8333dp</dimen>

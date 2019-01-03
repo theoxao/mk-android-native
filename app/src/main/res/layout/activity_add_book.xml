@@ -1,18 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/light_grey"
         tools:context=".ui.activities.AddBookActivity">
 
-
-    <TextView
-            android:id="@+id/add_book"
+    <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40"
-            android:text="GO"
-            android:background="@color/default_bmb_shadow_color"
+            android:layout_height="@dimen/dp_42"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/light"
+            android:elevation="@dimen/dp_1"
+            app:layout_constraintTop_toTopOf="parent" android:id="@+id/constraintLayout">
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <com.ruffian.library.widget.RTextView
+            android:id="@+id/scan_isbn_entry"
+            android:elevation="@dimen/common_elevation"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            app:background_normal="@color/colorPrimary"
+            android:text="扫描图书条码"
+            android:textSize="@dimen/dp_16"
+            android:textColor="@color/light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:drawablePadding="@dimen/dp_16"
+            app:icon_src_normal="@drawable/ic_newbook_scan_isbn"
+            android:gravity="center"
+            icon_direction="left"
+            app:icon_with_text="true"
+            icon_height="2dp"
+            icon_width="2dp"
+            app:corner_radius="@dimen/dp_4"
+    />
+
+
+    <ImageView
+            android:id="@+id/book_cover"
+            android:elevation="@dimen/common_elevation"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_110"
+            android:layout_marginTop="@dimen/dp_16"
+            android:src="@drawable/ic_newbook_default_musk"
+            android:background="@color/light"
+            app:layout_constraintTop_toBottomOf="@+id/scan_isbn_entry"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.ruffian.library.widget.REditText
+            android:id="@+id/name_edit_view"
+            android:maxLines="1"
+            android:imeOptions="actionNext"
+            android:elevation="@dimen/dp_2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginTop="@dimen/dp_24"
+            app:layout_constraintTop_toBottomOf="@+id/book_cover"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            app:corner_radius="@dimen/dp_4"
+            android:gravity="center"
+            app:background_normal="@color/light"
+            android:textColor="@color/thirdText"
+            android:textSize="@dimen/dp_16"
+            android:hint="书名"
+    />
+
+    <LinearLayout
+            android:id="@+id/linear1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_58"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dp_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_edit_view">
+
+        <com.ruffian.library.widget.REditText
+                android:id="@+id/author_edit_view"
+                android:maxLines="1"
+                android:imeOptions="actionNext"
+                android:elevation="@dimen/dp_2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/dp_48"
+                app:layout_constraintTop_toBottomOf="@+id/publisher_edit_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_5"
+                app:corner_radius="@dimen/dp_4"
+                android:gravity="center"
+                app:background_normal="@color/light"
+                android:textColor="@color/thirdText"
+                android:textSize="@dimen/dp_16"
+                android:hint="作者"
+        />
+
+        <com.ruffian.library.widget.REditText
+                android:id="@+id/publisher_edit_view"
+                android:maxLines="1"
+                android:imeOptions="actionNext"
+                android:elevation="@dimen/dp_2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/dp_48"
+                app:layout_constraintTop_toBottomOf="@+id/book_cover"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_marginEnd="@dimen/dp_16"
+                app:corner_radius="@dimen/dp_4"
+                android:gravity="center"
+                app:background_normal="@color/light"
+                android:textColor="@color/thirdText"
+                android:textSize="@dimen/dp_16"
+                android:hint="出版社"
+        />
+    </LinearLayout>
+
+    <com.ruffian.library.widget.REditText
+            android:id="@+id/page_edit_view"
+            android:maxLines="1"
+            android:imeOptions="actionNext"
+            android:elevation="@dimen/dp_2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            app:layout_constraintTop_toBottomOf="@id/linear1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            app:corner_radius="@dimen/dp_4"
+            android:gravity="center"
+            app:background_normal="@color/light"
+            android:textColor="@color/thirdText"
+            android:textSize="@dimen/dp_16"
+            android:hint="总页数"
+            android:inputType="number"
     />
 
 </android.support.constraint.ConstraintLayout>

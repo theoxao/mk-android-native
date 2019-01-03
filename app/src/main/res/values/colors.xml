@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#1387ff</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="light">#ffffff</color>
+    <color name="hint">#cececece</color>
 
+    <color name="light_grey">#f4f4f4</color>
     <color name="home_divide">#fef7f9</color>
     <color name="subTitle">#969797</color>
     <color name="lessDarker">#343434</color>

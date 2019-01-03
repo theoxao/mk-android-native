@@ -18,12 +18,18 @@ import com.xys.libzxing.zxing.activity.CaptureActivity
 
 class AddBookActivity : MultiResultActivity() {
     private lateinit var presenter: MultiPresenter
-    private lateinit var addEntry: TextView
+    private lateinit var scanEntry: RTextView
+    private lateinit var coverView: ImageView
+    private lateinit var nameView: REditText
+    private lateinit var authorView: REditText
+    private lateinit var publisherView: REditText
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_book)
-        addEntry = findViewById(R.id.add_book)
+        scanEntry = findViewById(R.id.scan_isbn_entry)
+
         presenter = MultiPresenter(this)
         presenter.requestData(Routers.TAGLIST, null)
         addEntry.setOnClickListener {
