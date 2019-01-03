@@ -15,7 +15,6 @@
  */
 package com.xys.libzxing.zxing.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,17 +23,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.*;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
+import android.widget.TextView;
 import com.google.zxing.Result;
 import com.theoxao.maikan.R;
+import com.theoxao.maikan.utils.ToastUtils;
 import com.xys.libzxing.zxing.camera.CameraManager;
 import com.xys.libzxing.zxing.decode.DecodeThread;
 import com.xys.libzxing.zxing.utils.BeepManager;
@@ -66,6 +65,7 @@ public final class CaptureActivity extends AppCompatActivity implements SurfaceH
     private RelativeLayout scanContainer;
     private RelativeLayout scanCropView;
     private ImageView scanLine;
+    private EditText inputView;
 
     private Rect mCropRect = null;
     private boolean isHasSurface = false;
@@ -90,9 +90,31 @@ public final class CaptureActivity extends AppCompatActivity implements SurfaceH
         scanContainer = (RelativeLayout) findViewById(R.id.capture_container);
         scanCropView = (RelativeLayout) findViewById(R.id.capture_crop_view);
         scanLine = (ImageView) findViewById(R.id.capture_scan_line);
-
+        inputView = findViewById(R.id.isbnInput);
         inactivityTimer = new InactivityTimer(this);
         beepManager = new BeepManager(this);
+
+        inputView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    String text = v.getText().toString();
+                    if (text.length() != 10 && text.length() != 13) {
+                        //TODO make a toast
+                        ToastUtils.showToast("isbn码长度为10位或13位");
+                        return true;
+                    }
+                    Intent resultIntent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("result", text);
+                    resultIntent.putExtras(bundle);
+                    CaptureActivity.this.setResult(RESULT_OK, resultIntent);
+                    CaptureActivity.this.finish();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         TranslateAnimation animation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0.0f, Animation
                 .RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT,

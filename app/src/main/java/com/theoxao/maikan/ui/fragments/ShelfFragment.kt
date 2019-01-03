@@ -47,17 +47,7 @@ class ShelfFragment : MultiResultFragment() {
         publisherView = view.findViewById(R.id.publisher)
         presenter = MultiPresenter(this)
         fab.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(context as Activity,
-                            arrayOf(Manifest.permission.CAMERA),
-                            2)
-                } else {
-                    showToast("权限已申请")
-                }
-            }
-            val openCameraIntent = Intent(context, CaptureActivity::class.java)
-            startActivityForResult(openCameraIntent, 0)
+            startActivity(Intent(context, AddBookActivity::class.java))
         }
         presenter.requestData(Routers.TAGLIST, null)
         return view
@@ -73,15 +63,4 @@ class ShelfFragment : MultiResultFragment() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            if (data == null)
-                return
-            val isbn = data.extras.getString("result")
-            val intent = Intent(context, AddBookActivity::class.java)
-            intent.putExtra("isbn", isbn)
-            startActivity(intent)
-        }
-    }
 }
