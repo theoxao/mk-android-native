@@ -47,7 +47,9 @@ class ShelfFragment : MultiResultFragment() {
         publisherView = view.findViewById(R.id.publisher)
         presenter = MultiPresenter(this)
         fab.setOnClickListener {
-            startActivity(Intent(context, AddBookActivity::class.java))
+            val intent = Intent(context, AddBookActivity::class.java)
+            intent.putExtra(AddBookActivity.FROM_KEY, AddBookActivity.FROM_SHELF)
+            startActivity(intent)
         }
         presenter.requestData(Routers.TAGLIST, null)
         return view

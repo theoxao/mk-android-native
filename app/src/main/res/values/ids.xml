@@ -22,4 +22,6 @@
     <item name="restart_preview" type="id" />
     <item name="return_scan_result" type="id" />
 
+    <item name="item_click_support" type="id"/>
+
 </resources>

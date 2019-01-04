@@ -20,6 +20,7 @@
 
 
     <com.ruffian.library.widget.RTextView
+            android:visibility="invisible"
             android:id="@+id/scan_isbn_entry"
             android:elevation="@dimen/common_elevation"
             android:layout_width="match_parent"
@@ -34,13 +35,13 @@
             android:layout_marginTop="@dimen/dp_16"
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginEnd="@dimen/dp_16"
-            android:drawablePadding="@dimen/dp_16"
-            app:icon_src_normal="@drawable/ic_newbook_scan_isbn"
+            android:drawablePadding="@dimen/dp_4"
+            app:icon_src_normal="@drawable/ic_scan"
             android:gravity="center"
             icon_direction="left"
             app:icon_with_text="true"
-            icon_height="2dp"
-            icon_width="2dp"
+            icon_height="@dimen/dp_18"
+            icon_width="@dimen/dp_18"
             app:corner_radius="@dimen/dp_4"
     />
 
@@ -55,7 +56,8 @@
             android:background="@color/light"
             app:layout_constraintTop_toBottomOf="@+id/scan_isbn_entry"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:transitionName="@string/set_book_cover"/>
 
     <com.ruffian.library.widget.REditText
             android:id="@+id/name_edit_view"
@@ -76,6 +78,7 @@
             android:textColor="@color/thirdText"
             android:textSize="@dimen/dp_16"
             android:hint="书名"
+            android:transitionName="@string/set_book_name"
     />
 
     <LinearLayout
@@ -105,6 +108,7 @@
                 android:gravity="center"
                 app:background_normal="@color/light"
                 android:textColor="@color/thirdText"
+                android:transitionName="@string/set_book_author"
                 android:textSize="@dimen/dp_16"
                 android:hint="作者"
         />
@@ -124,6 +128,7 @@
                 android:layout_marginEnd="@dimen/dp_16"
                 app:corner_radius="@dimen/dp_4"
                 android:gravity="center"
+                android:transitionName="@string/set_book_publisher"
                 app:background_normal="@color/light"
                 android:textColor="@color/thirdText"
                 android:textSize="@dimen/dp_16"
@@ -145,11 +150,37 @@
             android:layout_marginEnd="@dimen/dp_16"
             app:corner_radius="@dimen/dp_4"
             android:gravity="center"
+            android:transitionName="@string/set_book_page_count"
             app:background_normal="@color/light"
             android:textColor="@color/thirdText"
             android:textSize="@dimen/dp_16"
             android:hint="总页数"
             android:inputType="number"
+    />
+
+    <com.ruffian.library.widget.RTextView
+            android:id="@+id/tag_select_entry"
+            android:elevation="@dimen/dp_2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            app:background_normal="@color/light"
+            android:text="@string/choose_tag"
+            android:textSize="@dimen/dp_16"
+            android:padding="@dimen/dp_8"
+            app:text_color_normal="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/page_edit_view"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:drawablePadding="@dimen/dp_4"
+            android:drawableEnd="@drawable/ic_list_more"
+            android:gravity="center"
+            app:icon_with_text="false"
+            icon_height="@dimen/dp_18"
+            icon_width="@dimen/dp_18"
+            app:corner_radius="@dimen/dp_4"
     />
 
 </android.support.constraint.ConstraintLayout>

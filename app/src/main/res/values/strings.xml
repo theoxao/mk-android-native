@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">麦看阅读</string>
     <string name="zxing_bar_name">ZxingLib</string>
+    <string name="set_book_name">book_name</string>
+    <string name="set_book_author">book_author</string>
+    <string name="set_book_page_count">book_page_count</string>
+    <string name="set_book_publisher">book_publisher</string>
+    <string name="set_book_cover">book_cover</string>
+    <string name="choose_tag">选择书籍分类</string>
 </resources>

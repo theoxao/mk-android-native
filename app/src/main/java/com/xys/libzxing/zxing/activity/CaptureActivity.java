@@ -33,7 +33,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.google.zxing.Result;
 import com.theoxao.maikan.R;
-import com.theoxao.maikan.utils.ToastUtils;
+import com.theoxao.maikan.ui.activities.SelectBookActivity;
 import com.xys.libzxing.zxing.camera.CameraManager;
 import com.xys.libzxing.zxing.decode.DecodeThread;
 import com.xys.libzxing.zxing.utils.BeepManager;
@@ -99,17 +99,14 @@ public final class CaptureActivity extends AppCompatActivity implements SurfaceH
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     String text = v.getText().toString();
-                    if (text.length() != 10 && text.length() != 13) {
-                        //TODO make a toast
-                        ToastUtils.showToast("isbn码长度为10位或13位");
-                        return true;
-                    }
-                    Intent resultIntent = new Intent();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("result", text);
-                    resultIntent.putExtras(bundle);
-                    CaptureActivity.this.setResult(RESULT_OK, resultIntent);
-                    CaptureActivity.this.finish();
+
+                    //FIXME
+//                    if (text.length() != 10 && text.length() != 13) {
+//                        //TODO make a toast
+//                        ToastUtils.showToast("isbn码长度为10位或13位");
+//                        return true;
+//                    }
+                    returnResult(text);
                     return true;
                 }
                 return false;
@@ -206,14 +203,14 @@ public final class CaptureActivity extends AppCompatActivity implements SurfaceH
     public void handleDecode(Result rawResult, Bundle bundle) {
         inactivityTimer.onActivity();
         beepManager.playBeepSoundAndVibrate();
+        returnResult(rawResult.getText());
+    }
 
-        Intent resultIntent = new Intent();
-        bundle.putInt("width", mCropRect.width());
-        bundle.putInt("height", mCropRect.height());
-        bundle.putString("result", rawResult.getText());
-        resultIntent.putExtras(bundle);
-        this.setResult(RESULT_OK, resultIntent);
-        CaptureActivity.this.finish();
+    private void returnResult(String result) {
+        Intent intent = new Intent(this, SelectBookActivity.class);
+        intent.putExtra("isbn", result);
+        startActivity(intent);
+        this.finish();
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {

@@ -11,12 +11,12 @@ abstract class MultiResultActivity : AppCompatActivity(), MultiResultView {
 
     protected var mContext: Context? = null
 
-    lateinit var loadingView: LoadingView
+//    lateinit var loadingView: LoadingView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         this.mContext = this;
-        loadingView = LoadingView(this, R.style.CustomDialog)
-        loadingView.setCanceledOnTouchOutside(false)
+//        loadingView = LoadingView(this, R.style.CustomDialog)
+//        loadingView.setCanceledOnTouchOutside(false)
         super.onCreate(savedInstanceState)
     }
 
@@ -33,11 +33,11 @@ abstract class MultiResultActivity : AppCompatActivity(), MultiResultView {
     }
 
     override fun onShowLoading() {
-        loadingView.show()
+//        loadingView.show()
     }
 
     override fun onHideLoading() {
-        loadingView.hide()
+//        loadingView.hide()
     }
 
     override fun onError() {

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light"
+        android:layout_margin="@dimen/dp_8"
+        android:paddingEnd="@dimen/dp_8"
+>
+
+    <ImageView
+            android:elevation="@dimen/dp_1"
+            android:background="@color/light"
+            android:id="@+id/book_cover"
+            android:layout_margin="@dimen/dp_12"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_85"
+            android:transitionName="@string/set_book_cover"
+            android:src="@drawable/ic_newbook_default_musk"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    <TextView
+            android:id="@+id/name_view"
+            android:text="TextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dp_16"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:layout_marginTop="@dimen/dp_16"
+            android:gravity="start"
+            android:transitionName="@string/set_book_name"
+            android:layout_marginStart="@dimen/dp_8"
+            android:textColor="@color/primaryText"
+            app:layout_constraintStart_toEndOf="@+id/book_cover"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+            android:id="@+id/author_view"
+            android:text="TextView"
+            android:textSize="@dimen/dp_12"
+            android:minHeight="@dimen/dp_0"
+            android:gravity="start"
+            android:transitionName="@string/set_book_author"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_8"
+            android:textColor="@color/secondText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/book_cover"
+            app:layout_constraintTop_toBottomOf="@+id/name_view"/>
+    <TextView
+            android:id="@+id/page_count_view"
+            android:text="TextView"
+            android:textSize="@dimen/dp_12"
+            android:minHeight="@dimen/dp_0"
+            android:gravity="start"
+            android:layout_marginTop="@dimen/dp_8"
+            android:transitionName="@string/set_book_page_count"
+            android:layout_marginStart="@dimen/dp_8"
+            android:textColor="@color/secondText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/author_view"
+            app:layout_constraintTop_toBottomOf="@+id/name_view"/>
+
+    <TextView
+            android:id="@+id/publisher_view"
+            android:transitionName="@string/set_book_publisher"
+            android:text="TextView"
+            android:textSize="@dimen/dp_12"
+            android:minHeight="@dimen/dp_0"
+            android:layout_marginTop="@dimen/dp_8"
+            android:gravity="start"
+            android:layout_marginStart="@dimen/dp_8"
+            android:textColor="@color/secondText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/book_cover"
+            app:layout_constraintTop_toBottomOf="@+id/author_view"/>
+
+</android.support.constraint.ConstraintLayout>

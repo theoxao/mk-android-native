@@ -27,10 +27,13 @@
                 android:configChanges="orientation|keyboardHidden"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".ui.activities.AddBookActivity"
-                  android:windowSoftInputMode="adjustUnspecified|stateHidden"
-        >
-
+        <activity
+                android:name=".ui.activities.AddBookActivity"
+                android:windowSoftInputMode="adjustUnspecified|stateHidden">
+        </activity>
+        <activity android:name=".ui.activities.SelectBookActivity">
+        </activity>
+        <activity android:name=".ui.activities.TagSelectActivity">
         </activity>
     </application>
 
