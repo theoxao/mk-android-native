@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/book_cover"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/book_name"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="bookName"
+        android:textSize="@dimen/dp_14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_cover" />
+
+    <TextView
+        android:id="@+id/book_author"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_6"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_name" />
+
+    <TextView
+        android:id="@+id/recentRead"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="@dimen/dp_4"
+        android:text="最近阅读"
+        android:textColor="@color/light"
+        android:textSize="@dimen/dp_8"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/book_cover"
+        app:layout_constraintStart_toStartOf="@id/book_cover"
+        tools:layout_editor_absoluteY="74dp" />
+
+
+</android.support.constraint.ConstraintLayout>

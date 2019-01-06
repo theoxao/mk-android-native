@@ -15,13 +15,13 @@ abstract class MultiResultFragment : Fragment(), MultiResultView {
     protected var mContext: Context? = null
     protected var mRootView: View? = null
 
-    private lateinit var loadingView: LoadingView
+//    private lateinit var loadingView: LoadingView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         this.mContext = activity;
-        loadingView = LoadingView(activity, R.style.CustomDialog)
-        loadingView.setCanceledOnTouchOutside(false)
+//        loadingView = LoadingView(activity, R.style.CustomDialog)
+//        loadingView.setCanceledOnTouchOutside(false)
         return mRootView;
     }
 
@@ -32,11 +32,11 @@ abstract class MultiResultFragment : Fragment(), MultiResultView {
     }
 
     override fun onShowLoading() {
-        loadingView.show()
+//        loadingView.show()
     }
 
     override fun onHideLoading() {
-        loadingView.hide()
+//        loadingView.hide()
     }
 
     override fun onError() {

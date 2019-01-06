@@ -7,4 +7,7 @@
     <string name="set_book_publisher">book_publisher</string>
     <string name="set_book_cover">book_cover</string>
     <string name="choose_tag">选择书籍分类</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

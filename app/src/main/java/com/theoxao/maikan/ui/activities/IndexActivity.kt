@@ -2,6 +2,7 @@ package com.theoxao.maikan.ui.activities
 
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
+import android.support.v4.view.ViewCompat
 import android.view.View
 import com.theoxao.maikan.R
 import com.theoxao.maikan.mvp.MultiResultActivity

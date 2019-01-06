@@ -19,12 +19,21 @@
             android:id="@+id/constraintLayout">
     </android.support.constraint.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/search_result_tip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:gravity="center"
+        android:textSize="@dimen/dp_14"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
     <android.support.v7.widget.RecyclerView
             android:elevation="@dimen/common_elevation"
             android:id="@+id/book_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_16"
-            app:layout_constraintTop_toBottomOf="@id/constraintLayout"/>
+        app:layout_constraintTop_toBottomOf="@id/search_result_tip" />
 
 </android.support.constraint.ConstraintLayout>

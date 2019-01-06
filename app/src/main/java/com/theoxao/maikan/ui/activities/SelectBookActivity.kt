@@ -4,8 +4,10 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.v4.app.ActivityManagerCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.widget.TextView
 import com.theoxao.maikan.R
 import com.theoxao.maikan.constant.Routers
 import com.theoxao.maikan.model.Book
@@ -20,13 +22,17 @@ class SelectBookActivity : MultiResultActivity() {
 
     private lateinit var presenter: MultiPresenter
     private lateinit var bookRecyclerView: RecyclerView
+    private lateinit var searchResultView: TextView
+    private lateinit var isbn: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_book)
         bookRecyclerView = findViewById(R.id.book_recycler_view)
+        searchResultView = findViewById(R.id.search_result_tip)
+
         presenter = MultiPresenter(this)
-        val isbn = intent.getStringExtra("isbn")
+        isbn = intent.getStringExtra("isbn")
         presenter.requestData(Routers.ISBN_SEARCH + isbn, "isbn")
     }
 
@@ -35,6 +41,7 @@ class SelectBookActivity : MultiResultActivity() {
             "isbn" -> {
                 val books = ObjectMapperUtils.objectMapper.readValue<ArrayList<Book>>(data, ObjectMapperUtils.objectMapper.typeFactory.constructCollectionType(ArrayList::class.java, Book::class.java))
                 if (!books.isEmpty()) {
+                    searchResultView.text = "通过条码 ${isbn} 找到以下书籍"
                     val adapter = BookViewAdapter(books, this)
                     bookRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
                     bookRecyclerView.adapter = adapter
@@ -56,7 +63,10 @@ class SelectBookActivity : MultiResultActivity() {
                                 holder.coverView.transitionName
                         ).toBundle()
                         startActivity(intent, bundle)
-//                        this@SelectBookActivity.finish()
+                        this@SelectBookActivity.finish()
+                        AddBookActivity.that?.let {
+                            it.finish()
+                        }
                     }
                 }
             }
