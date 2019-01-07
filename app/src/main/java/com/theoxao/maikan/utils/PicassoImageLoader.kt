@@ -48,6 +48,25 @@ class PicassoImageLoader() : ImageLoader() {
         }
     }
 
+    fun displayCover(context: Context, path: Any?, imageView: ImageView, name: String) {
+        AppUtils.runOnUI {
+            when (path) {
+                is String -> {
+                    var realPath = "default"
+                    if (path.startsWith("//"))
+                        realPath = "https:$path"
+                    else if (StringUtils.isNoneEmpty(path))
+                        realPath = path
+                    Picasso.with(context).load(realPath
+                            ?: "123").placeholder(R.drawable.empty_cover).error(R.drawable.empty_cover).into(imageView)
+                }
+                is Int -> {
+                    Picasso.with(context).load(path).placeholder(R.drawable.empty_cover).error(R.drawable.empty_cover).into(imageView)
+                }
+            }
+        }
+    }
+
     fun displayAvatar(context: Context, path: Any, avatarView: ImageView) {
 
         AppUtils.runOnUI {

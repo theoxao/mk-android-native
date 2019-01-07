@@ -12,7 +12,8 @@ import com.theoxao.maikan.R
 import com.theoxao.maikan.model.Tag
 
 class TagSelectAdapter(private val tags: ArrayList<Tag>, private val context: Context, private val selected: String) : RecyclerView.Adapter<TagSelectViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TagSelectViewHolder {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagSelectViewHolder {
         return TagSelectViewHolder(LayoutInflater.from(context).inflate(R.layout.tag_select_recycler_view, parent, false))
     }
 

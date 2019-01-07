@@ -16,7 +16,7 @@ import com.theoxao.maikan.utils.PicassoImageLoader
 
 
 class BookViewAdapter(private val books: ArrayList<Book>, private val context: Context) : RecyclerView.Adapter<BookViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BookViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         return BookViewHolder(LayoutInflater.from(context).inflate(R.layout.book_list_recycler_view, parent, false))
     }
 
@@ -26,7 +26,7 @@ class BookViewAdapter(private val books: ArrayList<Book>, private val context: C
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val book = books[position]
-        PicassoImageLoader().displayImage(context, book.cover, holder.coverView)
+        PicassoImageLoader().displayCover(context, book.cover, holder.coverView, book.name ?: "")
         holder.nameView.text = book.name
         holder.authorView.text = "${book.author}"
         holder.pageCountView.text = "-${book.pageCount}页"

@@ -1,6 +1,7 @@
 package com.theoxao.maikan.ui.fragments
 
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -45,8 +46,8 @@ class ShelfFragment : MultiResultFragment() {
         viewPager = view.findViewById(R.id.view_pager)
 
         tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
-        tabLayout.setTabTextColors(ContextCompat.getColor(context, R.color.fourthText), ContextCompat.getColor(context, R.color.colorPrimary))
-        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(context, R.color.colorPrimary))
+        tabLayout.setTabTextColors(ContextCompat.getColor(context!!, R.color.fourthText), ContextCompat.getColor(context!!, R.color.colorPrimary))
+        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(context!!, R.color.colorPrimary))
         tabLayout.setupWithViewPager(viewPager)
 
         viewPager = view.findViewById(R.id.view_pager)
@@ -54,10 +55,21 @@ class ShelfFragment : MultiResultFragment() {
         fab.setOnClickListener {
             val intent = Intent(context, AddBookActivity::class.java)
             intent.putExtra(AddBookActivity.FROM_KEY, AddBookActivity.FROM_SHELF)
-            startActivity(intent)
+            this@ShelfFragment.startActivityForResult(intent, 0)
         }
         presenter.requestData(Routers.TAGLIST, null)
         return view
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK) {
+            childFragmentManager.fragments.forEach { it ->
+                if (it is TagPageFragment && it.isVisible) {
+                    it.reload()
+                }
+            }
+        }
     }
 
     override fun onSuccess(target: String, data: String) {
@@ -65,7 +77,6 @@ class ShelfFragment : MultiResultFragment() {
         when (target) {
             Routers.TAGLIST -> {
                 val tags = objectMapper.readValue<ArrayList<Tag>>(data, objectMapper.typeFactory.constructCollectionType(ArrayList::class.java, Tag::class.java))
-
                 TagFixed.values().forEach {
                     indicators.add(it.display)
                     val bundle = Bundle()

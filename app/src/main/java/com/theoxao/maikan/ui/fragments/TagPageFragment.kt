@@ -17,7 +17,6 @@ import com.theoxao.maikan.mvp.MultiResultFragment
 import com.theoxao.maikan.ui.adapter.ShelfBookListAdapter
 import com.theoxao.maikan.ui.views.GridSpacingItemDecoration
 import com.theoxao.maikan.utils.ObjectMapperUtils.Companion.objectMapper
-import com.theoxao.maikan.utils.ScreenUtils
 
 class TagPageFragment : MultiResultFragment() {
 
@@ -33,13 +32,17 @@ class TagPageFragment : MultiResultFragment() {
         val view = inflater.inflate(R.layout.fragment_tag_page, container, false)
         noResultView = view.findViewById(R.id.no_result_view)
         shelfBookRecyclerView = view.findViewById(R.id.shelf_book_recycler_view)
-        tagName = arguments.getString("tag")
+        tagName = arguments?.getString("tag") ?: ""
         if (tagName == TagFixed.ALL.code)
             tagName = ""
         presenter = MultiPresenter(this)
         requestBody["tag"] = tagName
         presenter.getData(Routers.SHELF_TAG_LIST, requestBody, "shelf_tag_list")
         return view
+    }
+
+    fun reload() {
+        presenter.getData(Routers.SHELF_TAG_LIST, requestBody, "shelf_tag_list")
     }
 
     override fun onSuccess(target: String, data: String) {
@@ -50,14 +53,11 @@ class TagPageFragment : MultiResultFragment() {
                     noResultView.visibility = View.VISIBLE
                 else
                     noResultView.visibility = View.GONE
-
-                shelfBookRecyclerView.layoutManager = object : GridLayoutManager(context, 3) {
-                    override fun canScrollVertically(): Boolean {
-                        return false
-                    }
-                }
-                shelfBookRecyclerView.addItemDecoration(GridSpacingItemDecoration(3, ScreenUtils.dpToPxInt(18f), false))
-                shelfBookRecyclerView.adapter = ShelfBookListAdapter(shelfBooks, context)
+                if (shelfBookRecyclerView.itemDecorationCount > 0)
+                    shelfBookRecyclerView.removeItemDecorationAt(0)
+                shelfBookRecyclerView.layoutManager = GridLayoutManager(context, 3)
+                shelfBookRecyclerView.addItemDecoration(GridSpacingItemDecoration(3, context!!.resources.getDimensionPixelOffset(R.dimen.dp_16), false))
+                shelfBookRecyclerView.adapter = ShelfBookListAdapter(shelfBooks, context!!)
             }
         }
     }

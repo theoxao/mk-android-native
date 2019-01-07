@@ -17,5 +17,6 @@
     <color name="fourthText">#484848</color>
 
     <color name="fabColor">#05e9c0</color>
+    <color name="danger">#e11b1b</color>
 
 </resources>

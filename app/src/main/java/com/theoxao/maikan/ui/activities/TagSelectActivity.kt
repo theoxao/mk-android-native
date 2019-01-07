@@ -48,7 +48,6 @@ class TagSelectActivity : MultiResultActivity() {
                     this@TagSelectActivity.setResult(Activity.RESULT_OK, resultIntent)
                     this@TagSelectActivity.finish()
                 }
-
             }
         }
     }

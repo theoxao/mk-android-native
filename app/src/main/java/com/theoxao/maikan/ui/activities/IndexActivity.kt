@@ -1,14 +1,16 @@
 package com.theoxao.maikan.ui.activities
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
-import android.support.v4.view.ViewCompat
 import android.view.View
 import com.theoxao.maikan.R
 import com.theoxao.maikan.mvp.MultiResultActivity
 import com.theoxao.maikan.ui.fragments.CircleFragment
 import com.theoxao.maikan.ui.fragments.HomeFragment
 import com.theoxao.maikan.ui.fragments.ShelfFragment
+import com.theoxao.maikan.ui.fragments.TagPageFragment
 import com.theoxao.maikan.utils.BottomBar
 import com.theoxao.maikan.utils.SharedPreferencesUtil
 

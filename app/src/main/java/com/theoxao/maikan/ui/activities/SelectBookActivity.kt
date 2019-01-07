@@ -56,6 +56,8 @@ class SelectBookActivity : MultiResultActivity() {
                         intent.putExtra("author", t.author)
                         intent.putExtra("publisher", t.publisher)
                         intent.putExtra("pageCount", t.pageCount)
+                        intent.putExtra("isbn", t.isbn)
+                        intent.putExtra("refBookId", t.id)
                         val holder = rcv.findViewHolderForAdapterPosition(pos) as BookViewHolder
                         val bundle = ActivityOptions.makeSceneTransitionAnimation(
                                 this@SelectBookActivity,
@@ -67,6 +69,7 @@ class SelectBookActivity : MultiResultActivity() {
                         AddBookActivity.that?.let {
                             it.finish()
                         }
+                        AddBookActivity.that == null
                     }
                 }
             }

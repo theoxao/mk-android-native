@@ -59,17 +59,17 @@
 
 
             <ImageView
-                android:id="@+id/book_cover"
-                android:layout_width="@dimen/dp_80"
-                android:layout_height="@dimen/dp_110"
-                android:layout_marginTop="@dimen/dp_16"
-                android:background="@color/light"
-                android:elevation="@dimen/common_elevation"
-                android:src="@drawable/ic_newbook_default_musk"
-                android:transitionName="@string/set_book_cover"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/scan_isbn_entry" />
+                    android:id="@+id/book_cover"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_110"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:background="@color/light_grey"
+                    android:elevation="@dimen/common_elevation"
+                    android:src="@drawable/ic_add_cover"
+                    android:transitionName="@string/set_book_cover"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/scan_isbn_entry" />
 
             <com.ruffian.library.widget.REditText
                 android:id="@+id/name_edit_view"
@@ -256,26 +256,28 @@
                 app:layout_constraintTop_toBottomOf="@id/read_progress" />
 
             <com.ruffian.library.widget.REditText
-                android:id="@+id/return_date"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_48"
-                android:layout_marginEnd="@dimen/dp_16"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginTop="@dimen/dp_10"
-                android:elevation="@dimen/dp_2"
-                android:gravity="center"
-                android:hint="归还日期"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLines="1"
-                android:textColor="@color/thirdText"
-                android:textSize="@dimen/dp_16"
-                android:visibility="gone"
-                app:background_normal="@color/light"
-                app:corner_radius="@dimen/dp_4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/borrowed" />
+                    android:id="@+id/return_date"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:elevation="@dimen/dp_2"
+                    android:gravity="center"
+                    android:hint="归还日期"
+                    android:imeOptions="actionNext"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:textColor="@color/thirdText"
+                    android:textSize="@dimen/dp_16"
+                    android:visibility="gone"
+                    app:background_normal="@color/light"
+                    app:corner_radius="@dimen/dp_4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/borrowed" />
 
             <com.ruffian.library.widget.REditText
                 android:id="@+id/remark"
@@ -288,7 +290,6 @@
                 android:gravity="center"
                 android:hint="其他备注"
                 android:imeOptions="actionNext"
-                android:inputType="number"
                 android:maxLines="1"
                 android:textColor="@color/thirdText"
                 android:textSize="@dimen/dp_16"

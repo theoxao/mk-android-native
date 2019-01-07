@@ -3,12 +3,13 @@ package com.theoxao.maikan.constant
 class Routers {
 
     companion object {
-        val host = "http://www.theoxao.com:8888/"
+        const val host = "http://www.theoxao.com:8888/"
 
-        val TAGLIST = "read/tag/list"
-        val SHELF_TAG_LIST = "read/shelf/list"
+        const val TAGLIST = "read/tag/list"
+        const val SHELF_TAG_LIST = "read/shelf/list"
+        const val ADD_BOOK = "read/read/add_book"
 
-        val ISBN_SEARCH = "read/book/isbn/"
+        const val ISBN_SEARCH = "read/book/isbn/"
     }
 
 }

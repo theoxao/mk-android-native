@@ -12,7 +12,7 @@ import com.theoxao.maikan.model.enums.ShelfBook
 import com.theoxao.maikan.utils.PicassoImageLoader
 
 class ShelfBookListAdapter(private val shelfBooks: ArrayList<ShelfBook>, private val context: Context) : RecyclerView.Adapter<ShelfBookViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ShelfBookViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShelfBookViewHolder {
         return ShelfBookViewHolder(LayoutInflater.from(context).inflate(R.layout.shelf_book_recycler_layout, parent, false))
     }
 
@@ -24,9 +24,11 @@ class ShelfBookListAdapter(private val shelfBooks: ArrayList<ShelfBook>, private
         val record = shelfBooks[position]
         holder.bookName.text = record.name
         holder.bookAuthor.text = record.author
-        PicassoImageLoader().displayImage(context, record.cover, holder.bookCover)
-        if (position == 0)
+        PicassoImageLoader().displayCover(context, record.cover, holder.bookCover, record.name ?: "")
+        if (position == 0) {
             holder.recentBook.visibility = View.VISIBLE
+            holder.recentBook.bringToFront()
+        }
     }
 }
 

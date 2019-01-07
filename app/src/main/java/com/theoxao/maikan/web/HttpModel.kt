@@ -5,8 +5,8 @@ import com.theoxao.maikan.constant.Routers
 import com.theoxao.maikan.mvp.BaseCallback
 import com.theoxao.maikan.mvp.MultiResultCallback
 import com.theoxao.maikan.utils.AppUtils
-import com.theoxao.maikan.utils.CacheUtil
 import com.theoxao.maikan.utils.ObjectMapperUtils
+import com.theoxao.maikan.utils.TimeSyncHelper
 import okhttp3.*
 import java.io.IOException
 
@@ -28,9 +28,14 @@ class HttpModel {
             override fun onResponse(call: Call?, response: Response?) {
                 val node = ObjectMapperUtils.objectMapper.readTree(response?.body()!!.string())
                 val status = node.get("status").asInt()
+                node.get("timestamp")?.asLong()?.let {
+                    d(this@HttpModel.javaClass.name, it.toString())
+                    TimeSyncHelper.syncServer(it)
+                }
                 when (status) {
                     200 -> {
                         AppUtils.runOnUI { baseCallback.onSuccess(node.get("data").toString()) }
+
                     }
                     500 -> AppUtils.runOnUI { baseCallback.onFailure("服务器内部出错...") }
                     else -> AppUtils.runOnUI { baseCallback.onFailure("出错啦...........啊") }
@@ -46,10 +51,15 @@ class HttpModel {
             override fun onFailure(call: Call?, e: IOException?) {
                 AppUtils.runOnUI { callback.onError() }
             }
+
             override fun onResponse(call: Call?, response: Response?) {
                 try {
                     val node = ObjectMapperUtils.objectMapper.readTree(response?.body()!!.string())
                     val status = node.get("status").asInt()
+                    node.get("timestamp")?.asLong()?.let {
+                        d(this@HttpModel.javaClass.name, it.toString())
+                        TimeSyncHelper.syncServer(it)
+                    }
                     when (status) {
                         200 -> {
                             AppUtils.runOnUI { callback.onSuccess(node.get("data").toString()) }
@@ -79,10 +89,15 @@ class HttpModel {
                 AppUtils.runOnUI { callback.onError() }
                 AppUtils.runOnUI { callback.onComplete() }
             }
+
             override fun onResponse(call: Call?, response: Response?) {
                 try {
                     val node = ObjectMapperUtils.objectMapper.readTree(response?.body()!!.string())
                     val status = node.get("status").asInt()
+                    node.get("timestamp")?.asLong()?.let {
+                        d(this@HttpModel.javaClass.name, it.toString())
+                        TimeSyncHelper.syncServer(it)
+                    }
                     when (status) {
                         200 -> AppUtils.runOnUI {
                             callback.onSuccess(target ?: url, node.get("data").toString())
@@ -117,10 +132,15 @@ class HttpModel {
                 AppUtils.runOnUI { callback.onError() }
                 AppUtils.runOnUI { callback.onComplete() }
             }
+
             override fun onResponse(call: Call?, response: Response?) {
                 try {
                     val node = ObjectMapperUtils.objectMapper.readTree(response?.body()!!.string())
                     val status = node.get("status").asInt()
+                    node.get("timestamp")?.asLong()?.let {
+                        d(this@HttpModel.javaClass.name, it.toString())
+                        TimeSyncHelper.syncServer(it)
+                    }
                     when (status) {
                         200 -> AppUtils.runOnUI {
                             callback.onSuccess(target ?: url, node.get("data").toString())
@@ -162,9 +182,5 @@ class HttpModel {
             }
         }
         return formEncodingBuilder.build()
-    }
-
-    private fun getType(url: String): Int {
-        return 0
     }
 }
