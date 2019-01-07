@@ -326,6 +326,9 @@ class AddBookActivity : MultiResultActivity() {
         }
     }
 
+    private fun uploadPic(picturePath: String?) {
+    }
+
     override fun onSuccess(target: String, data: String) {
         when (target) {
             Routers.ADD_BOOK -> {
