@@ -29,7 +29,6 @@ class HttpModel {
                 val node = ObjectMapperUtils.objectMapper.readTree(response?.body()!!.string())
                 val status = node.get("status").asInt()
                 node.get("timestamp")?.asLong()?.let {
-                    d(this@HttpModel.javaClass.name, it.toString())
                     TimeSyncHelper.syncServer(it)
                 }
                 when (status) {
@@ -57,7 +56,6 @@ class HttpModel {
                     val node = ObjectMapperUtils.objectMapper.readTree(response?.body()!!.string())
                     val status = node.get("status").asInt()
                     node.get("timestamp")?.asLong()?.let {
-                        d(this@HttpModel.javaClass.name, it.toString())
                         TimeSyncHelper.syncServer(it)
                     }
                     when (status) {
@@ -78,7 +76,6 @@ class HttpModel {
             }
 
         })
-
     }
 
     fun getWithUrl(url: String, target: String?, callback: MultiResultCallback) {
@@ -95,7 +92,6 @@ class HttpModel {
                     val node = ObjectMapperUtils.objectMapper.readTree(response?.body()!!.string())
                     val status = node.get("status").asInt()
                     node.get("timestamp")?.asLong()?.let {
-                        d(this@HttpModel.javaClass.name, it.toString())
                         TimeSyncHelper.syncServer(it)
                     }
                     when (status) {
@@ -138,7 +134,6 @@ class HttpModel {
                     val node = ObjectMapperUtils.objectMapper.readTree(response?.body()!!.string())
                     val status = node.get("status").asInt()
                     node.get("timestamp")?.asLong()?.let {
-                        d(this@HttpModel.javaClass.name, it.toString())
                         TimeSyncHelper.syncServer(it)
                     }
                     when (status) {

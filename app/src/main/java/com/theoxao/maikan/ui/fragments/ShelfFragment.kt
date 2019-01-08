@@ -27,7 +27,7 @@ import com.theoxao.maikan.utils.ObjectMapperUtils.Companion.objectMapper
 
 class ShelfFragment : MultiResultFragment() {
 
-    private lateinit var fab: FloatingActionButton
+    lateinit var fab: FloatingActionButton
     private lateinit var presenter: MultiPresenter
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager
@@ -101,7 +101,6 @@ class ShelfFragment : MultiResultFragment() {
             }
         }
     }
-
 
     inner class ViewPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {
