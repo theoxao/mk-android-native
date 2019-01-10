@@ -2,6 +2,7 @@ package com.theoxao.maikan.ui.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log.d
@@ -78,7 +79,7 @@ class BookDetailActivity : MultiResultActivity() {
             }
             "read_log"    -> {
                 val records = objectMapper.readValue<ArrayList<ReadLog>>(data, objectMapper.typeFactory.constructCollectionType(ArrayList::class.java, ReadLog::class.java))
-                readLogRecyclerView.layoutManager = LinearLayoutManager(this@BookDetailActivity, LinearLayoutManager.VERTICAL, false)
+                readLogRecyclerView.layoutManager = GridLayoutManager(this@BookDetailActivity, 1)
                 readLogRecyclerView.adapter = ReadLogAdapter(records, this@BookDetailActivity)
             }
         }
