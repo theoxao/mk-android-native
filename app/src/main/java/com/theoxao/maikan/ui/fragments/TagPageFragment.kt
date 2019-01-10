@@ -1,9 +1,13 @@
 package com.theoxao.maikan.ui.fragments
 
-
+import android.annotation.SuppressLint
+import android.app.ActivityOptions
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Pair
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -16,8 +20,11 @@ import com.theoxao.maikan.model.enums.ShelfBook
 import com.theoxao.maikan.model.enums.TagFixed
 import com.theoxao.maikan.mvp.MultiPresenter
 import com.theoxao.maikan.mvp.MultiResultFragment
+import com.theoxao.maikan.ui.activities.BookDetailActivity
 import com.theoxao.maikan.ui.adapter.ShelfBookListAdapter
+import com.theoxao.maikan.ui.adapter.ShelfBookViewHolder
 import com.theoxao.maikan.ui.views.GridSpacingItemDecoration
+import com.theoxao.maikan.utils.ItemClickSupport
 import com.theoxao.maikan.utils.ObjectMapperUtils.Companion.objectMapper
 
 class TagPageFragment : MultiResultFragment() {
@@ -31,6 +38,7 @@ class TagPageFragment : MultiResultFragment() {
     private val fade = AlphaAnimation(1f, 0f)
     private val show = AlphaAnimation(0f, 1f)
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -53,7 +61,7 @@ class TagPageFragment : MultiResultFragment() {
                         it.fab.alpha = 0f
                         it.fab.startAnimation(fade)
                     }
-                    MotionEvent.ACTION_UP -> {
+                    MotionEvent.ACTION_UP   -> {
                         it.fab.startAnimation(show)
                         it.fab.alpha = 1f
                     }
@@ -87,6 +95,21 @@ class TagPageFragment : MultiResultFragment() {
                 shelfBookRecyclerView.layoutManager = GridLayoutManager(context, 3)
                 shelfBookRecyclerView.addItemDecoration(GridSpacingItemDecoration(3, context!!.resources.getDimensionPixelOffset(R.dimen.dp_16), false))
                 shelfBookRecyclerView.adapter = ShelfBookListAdapter(shelfBooks, context!!)
+                ItemClickSupport.addTo(shelfBookRecyclerView).setOnItemClickListener { recyclerView, position, v ->
+                    val holder = recyclerView.findViewHolderForAdapterPosition(position) as ShelfBookViewHolder
+                    val book = shelfBooks[position]
+                    val intent = Intent(context, BookDetailActivity::class.java)
+                    intent.action = Intent.ACTION_VIEW
+                    intent.data = Uri.parse(book.cover ?: "")
+                    intent.putExtra("name", book.name)
+                    intent.putExtra("author", book.author)
+                    intent.putExtra(BookDetailActivity.USER_BOOK_INTENT_KEY, book.id)
+                    val bundle = ActivityOptions.makeSceneTransitionAnimation(activity,
+                        Pair(holder.bookCover, holder.bookCover.transitionName),
+                        Pair(holder.bookName, holder.bookName.transitionName),
+                        Pair(holder.bookAuthor, holder.bookAuthor.transitionName)).toBundle()
+                    startActivity(intent, bundle)
+                }
             }
         }
     }

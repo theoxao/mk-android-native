@@ -37,6 +37,10 @@
         </activity>
         <activity android:name=".ui.activities.TagSelectActivity">
         </activity>
+        <activity android:name=".ui.activities.TagMangerActivity">
+        </activity>
+        <activity android:name=".ui.activities.BookDetailActivity">
+        </activity>
     </application>
 
 </manifest>

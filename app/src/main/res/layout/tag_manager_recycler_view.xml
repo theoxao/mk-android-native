@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp_6"
+        android:paddingBottom="@dimen/dp_6"
+        android:paddingStart="@dimen/dp_4"
+        android:paddingEnd="@dimen/dp_4">
+
+    <com.ruffian.library.widget.RRelativeLayout
+            android:id="@+id/container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:corner_radius="@dimen/dp_8"
+            app:background_normal="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+                android:id="@+id/tag"
+                android:text="测试标签"
+                android:textSize="@dimen/dp_16"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginBottom="@dimen/dp_6"
+                android:layout_marginStart="@dimen/dp_6"
+                android:textColor="@color/light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <ImageView
+                android:id="@+id/remove"
+                android:foregroundGravity="center"
+                android:layout_toEndOf="@id/tag"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="@dimen/dp_2"
+                android:layout_marginEnd="@dimen/dp_6"
+                android:src="@drawable/ic_newbook_tags_delete"
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"/>
+    </com.ruffian.library.widget.RRelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -28,13 +28,13 @@ class TagSelectActivity : MultiResultActivity() {
         tagSelectRecyclerView = findViewById(R.id.tag_select_recycler_view)
         selected = intent.getStringExtra("selectTag")
         presenter = MultiPresenter(this)
-        presenter.requestData(Routers.TAGLIST, null)
+        presenter.requestData(Routers.TAG_LIST, null)
 
     }
 
     override fun onSuccess(target: String, data: String) {
         when (target) {
-            Routers.TAGLIST -> {
+            Routers.TAG_LIST -> {
                 val tags = ObjectMapperUtils.objectMapper.readValue<ArrayList<Tag>>(data, ObjectMapperUtils.objectMapper.typeFactory.constructCollectionType(ArrayList::class.java, Tag::class.java))
                 tagSelectRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
                 tagSelectRecyclerView.adapter = TagSelectAdapter(tags, this, selected)

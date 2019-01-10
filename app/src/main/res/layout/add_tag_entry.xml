@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ruffian.library.widget.RTextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:text="自定义分类"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_36"
+        android:gravity="center"
+        android:textSize="@dimen/dp_14"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_16"
+        app:background_normal="@color/colorPrimary"
+        app:text_color_normal="@color/light"
+        app:corner_radius="@dimen/dp_8"/>

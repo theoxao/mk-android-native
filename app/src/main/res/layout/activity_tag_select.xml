@@ -38,21 +38,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-        <com.ruffian.library.widget.RTextView
-                android:text="自定义分类"
-                android:layout_width="@dimen/dp_100"
-                android:layout_height="@dimen/dp_36"
-                android:gravity="center"
-                android:textSize="@dimen/dp_14"
-                android:layout_marginTop="@dimen/dp_16"
-                android:layout_marginBottom="@dimen/dp_16"
-                app:background_normal="@color/colorPrimary"
-                app:text_color_normal="@color/light"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:corner_radius="@dimen/dp_8"
-                app:layout_constraintTop_toBottomOf="@id/tag_select_recycler_view"/>
-
+        <include layout="@layout/add_tag_entry"
+                 android:layout_width="@dimen/dp_100"
+                 android:layout_height="@dimen/dp_36"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/tag_select_recycler_view"/>
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

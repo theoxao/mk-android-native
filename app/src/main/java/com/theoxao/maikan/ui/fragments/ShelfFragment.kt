@@ -15,6 +15,7 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.theoxao.maikan.R
 import com.theoxao.maikan.constant.Routers
 import com.theoxao.maikan.model.Tag
@@ -22,6 +23,8 @@ import com.theoxao.maikan.model.enums.TagFixed
 import com.theoxao.maikan.mvp.MultiPresenter
 import com.theoxao.maikan.mvp.MultiResultFragment
 import com.theoxao.maikan.ui.activities.AddBookActivity
+import com.theoxao.maikan.ui.activities.TagMangerActivity
+import com.theoxao.maikan.utils.ItemClickSupport
 import com.theoxao.maikan.utils.ObjectMapperUtils.Companion.objectMapper
 
 
@@ -31,11 +34,14 @@ class ShelfFragment : MultiResultFragment() {
     private lateinit var presenter: MultiPresenter
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager
+    private lateinit var tagManagerEntry: ImageView
     var indicators = arrayListOf<String>()
     var pageFragments = arrayListOf<Fragment>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_shelf, container, false)
         super.mContext = context
@@ -44,9 +50,13 @@ class ShelfFragment : MultiResultFragment() {
         fab = view.findViewById(R.id.fab)
         tabLayout = view.findViewById(R.id.tab_layout)
         viewPager = view.findViewById(R.id.view_pager)
+        tagManagerEntry = view.findViewById(R.id.tag_manager_entry)
 
         tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
-        tabLayout.setTabTextColors(ContextCompat.getColor(context!!, R.color.fourthText), ContextCompat.getColor(context!!, R.color.colorPrimary))
+        tabLayout.setTabTextColors(
+            ContextCompat.getColor(context!!, R.color.fourthText),
+            ContextCompat.getColor(context!!, R.color.colorPrimary)
+        )
         tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(context!!, R.color.colorPrimary))
         tabLayout.setupWithViewPager(viewPager)
 
@@ -57,7 +67,11 @@ class ShelfFragment : MultiResultFragment() {
             intent.putExtra(AddBookActivity.FROM_KEY, AddBookActivity.FROM_SHELF)
             this@ShelfFragment.startActivityForResult(intent, 0)
         }
-        presenter.requestData(Routers.TAGLIST, null)
+        presenter.requestData(Routers.TAG_LIST, null)
+
+        tagManagerEntry.setOnClickListener {
+            startActivity(Intent(context, TagMangerActivity::class.java))
+        }
         return view
     }
 
@@ -75,8 +89,11 @@ class ShelfFragment : MultiResultFragment() {
     override fun onSuccess(target: String, data: String) {
         d(this.javaClass.name, data)
         when (target) {
-            Routers.TAGLIST -> {
-                val tags = objectMapper.readValue<ArrayList<Tag>>(data, objectMapper.typeFactory.constructCollectionType(ArrayList::class.java, Tag::class.java))
+            Routers.TAG_LIST -> {
+                val tags = objectMapper.readValue<ArrayList<Tag>>(
+                    data,
+                    objectMapper.typeFactory.constructCollectionType(ArrayList::class.java, Tag::class.java)
+                )
                 TagFixed.values().forEach {
                     indicators.add(it.display)
                     val bundle = Bundle()

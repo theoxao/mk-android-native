@@ -301,6 +301,7 @@ class AddBookActivity : MultiResultActivity() {
         requestBody["pageCount"] = pageCountView.text.toString()
         requestBody["tag"] = tagSelectEntry.text.toString()
         requestBody["name"] = nameView.text.toString()
+        refBookId?.let { requestBody["refBookId"] = it }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

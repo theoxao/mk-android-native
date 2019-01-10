@@ -4,6 +4,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="@dimen/dp_88"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginBottom="@dimen/dp_8"
         android:layout_height="wrap_content">
 
     <TextView
@@ -30,7 +32,8 @@
             android:id="@+id/book_cover"
             android:layout_width="@dimen/dp_80"
             android:scaleType="fitXY"
-            android:layout_height="@dimen/dp_100"
+            android:layout_height="@dimen/dp_110"
+            android:transitionName="@string/set_book_cover"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -42,10 +45,14 @@
             android:layout_marginEnd="@dimen/dp_4"
             android:layout_marginStart="@dimen/dp_4"
             android:layout_marginTop="@dimen/dp_10"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="1"
             android:ellipsize="marquee"
             android:singleLine="true"
             android:textStyle="bold"
             android:text="bookName"
+            android:transitionName="@string/set_book_name"
             android:textSize="@dimen/dp_14"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/book_cover"/>
@@ -58,6 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_6"
             android:ellipsize="marquee"
+            android:transitionName="@string/set_book_author"
             android:singleLine="true"
             android:textSize="@dimen/dp_14"
             android:text="TextView"

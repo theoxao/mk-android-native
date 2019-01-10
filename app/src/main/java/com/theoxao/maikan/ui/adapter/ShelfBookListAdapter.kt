@@ -23,6 +23,7 @@ class ShelfBookListAdapter(private val shelfBooks: ArrayList<ShelfBook>, private
     override fun onBindViewHolder(holder: ShelfBookViewHolder, position: Int) {
         val record = shelfBooks[position]
         holder.bookName.text = record.name
+        holder.bookName.isSelected = true
         holder.bookAuthor.text = record.author
         PicassoImageLoader().displayCover(context, record.cover, holder.bookCover, record.name ?: "")
         if (position == 0) {

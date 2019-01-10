@@ -7,6 +7,7 @@
     <color name="light">#ffffff</color>
     <color name="hint">#cececece</color>
 
+    <color name="tag_recommend_bg">#E4F1FF</color>
     <color name="f5">#f5f5f5</color>
     <color name="light_grey">#fafafa</color>
     <color name="home_divide">#fef7f9</color>
@@ -16,7 +17,7 @@
     <color name="secondText">#999999</color>
     <color name="thirdText">#5d5e60</color>
     <color name="fourthText">#484848</color>
-
+    <color name="transparent">#00ffffff</color>
     <color name="fabColor">#05e9c0</color>
     <color name="danger">#e11b1b</color>
 
