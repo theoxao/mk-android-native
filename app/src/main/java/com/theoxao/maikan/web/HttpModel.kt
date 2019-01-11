@@ -16,7 +16,7 @@ class HttpModel {
     private var TOKEN = "70843bc3-794a-4d99-a05a-c4e6487036bd"
 
     fun getAnonymous(url: String, baseCallback: BaseCallback) {
-        d("request {} now", url)
+        d(this.javaClass.name, url)
         val request = requestBuilder(url).build()
         CLIENT.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
@@ -32,11 +32,11 @@ class HttpModel {
                     TimeSyncHelper.syncServer(it)
                 }
                 when (status) {
-                    200 -> {
+                    200  -> {
                         AppUtils.runOnUI { baseCallback.onSuccess(node.get("data").toString()) }
 
                     }
-                    500 -> AppUtils.runOnUI { baseCallback.onFailure("服务器内部出错...") }
+                    500  -> AppUtils.runOnUI { baseCallback.onFailure("服务器内部出错...") }
                     else -> AppUtils.runOnUI { baseCallback.onFailure("出错啦...........啊") }
                 }
             }
@@ -45,6 +45,7 @@ class HttpModel {
 
     @Deprecated("unused")
     fun getAuthorize(url: String, callback: BaseCallback) {
+        d(this.javaClass.name, url)
         val request = requestBuilder(url).build()
         CLIENT.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
@@ -59,12 +60,12 @@ class HttpModel {
                         TimeSyncHelper.syncServer(it)
                     }
                     when (status) {
-                        200 -> {
+                        200  -> {
                             AppUtils.runOnUI { callback.onSuccess(node.get("data").toString()) }
                         }
-                        500 -> AppUtils.runOnUI { callback.onFailure("服务器内部出错了") }
-                        401 -> AppUtils.runOnUI { callback.onUnAuthorized() }
-                        402 -> AppUtils.runOnUI { callback.onUnPurchased() }
+                        500  -> AppUtils.runOnUI { callback.onFailure("服务器内部出错了") }
+                        401  -> AppUtils.runOnUI { callback.onUnAuthorized() }
+                        402  -> AppUtils.runOnUI { callback.onUnPurchased() }
                         else -> {
                             AppUtils.runOnUI { callback.onFailure("请求出错啦...请稍后再试哈") }
                         }
@@ -79,7 +80,7 @@ class HttpModel {
     }
 
     fun getWithUrl(url: String, target: String?, callback: MultiResultCallback) {
-        d("request {} now ", url)
+        d(this.javaClass.name, url)
         val request = requestBuilder(url).build()
         CLIENT.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
@@ -95,18 +96,18 @@ class HttpModel {
                         TimeSyncHelper.syncServer(it)
                     }
                     when (status) {
-                        200 -> AppUtils.runOnUI {
+                        200  -> AppUtils.runOnUI {
                             callback.onSuccess(target ?: url, node.get("data").toString())
                         }
-                        500 -> AppUtils.runOnUI {
+                        500  -> AppUtils.runOnUI {
                             if (node.get("error") != null)
                                 callback.onFailure(target ?: url, node.get("error").asText())
                             else
                                 callback.onFailure(target ?: url, "服务器内部出错了")
                         }
-                        401 -> AppUtils.runOnUI { callback.onUnAuthorized(target ?: url) }
-                        402 -> AppUtils.runOnUI { callback.onUnPurchased(target ?: url) }
-                        404 -> AppUtils.runOnUI { callback.onNotFound(target ?: url) }
+                        401  -> AppUtils.runOnUI { callback.onUnAuthorized(target ?: url) }
+                        402  -> AppUtils.runOnUI { callback.onUnPurchased(target ?: url) }
+                        404  -> AppUtils.runOnUI { callback.onNotFound(target ?: url) }
                         else -> {
                             AppUtils.runOnUI { callback.onFailure(target ?: url, "请求出错啦...请稍后再试哈") }
                         }
@@ -121,7 +122,7 @@ class HttpModel {
     }
 
     fun postDataAsync(url: String, params: Map<String, String>?, target: String?, callback: MultiResultCallback) {
-        d("posting to  {} now ", url)
+        d(this.javaClass.name, url)
         val request = requestBuilder(url).post(setRequestBody(params)).build()
         CLIENT.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
@@ -137,17 +138,17 @@ class HttpModel {
                         TimeSyncHelper.syncServer(it)
                     }
                     when (status) {
-                        200 -> AppUtils.runOnUI {
+                        200  -> AppUtils.runOnUI {
                             callback.onSuccess(target ?: url, node.get("data").toString())
                         }
-                        500 -> AppUtils.runOnUI {
+                        500  -> AppUtils.runOnUI {
                             if (node.get("error") != null)
                                 callback.onFailure(target ?: url, node.get("error").asText())
                             else callback.onFailure(target ?: url, "服务器内部出错了")
                         }
-                        401 -> AppUtils.runOnUI { callback.onUnAuthorized(target ?: url) }
-                        402 -> AppUtils.runOnUI { callback.onUnPurchased(target ?: url) }
-                        404 -> AppUtils.runOnUI { callback.onNotFound(target ?: url) }
+                        401  -> AppUtils.runOnUI { callback.onUnAuthorized(target ?: url) }
+                        402  -> AppUtils.runOnUI { callback.onUnPurchased(target ?: url) }
+                        404  -> AppUtils.runOnUI { callback.onNotFound(target ?: url) }
                         else -> {
                             AppUtils.runOnUI { callback.onFailure(target ?: url, "请求出错啦...请稍后再试哈") }
                         }

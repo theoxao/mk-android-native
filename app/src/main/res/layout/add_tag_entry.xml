@@ -11,4 +11,4 @@
         android:layout_marginBottom="@dimen/dp_16"
         app:background_normal="@color/colorPrimary"
         app:text_color_normal="@color/light"
-        app:corner_radius="@dimen/dp_8"/>
+        app:corner_radius="@dimen/dp_4"/>

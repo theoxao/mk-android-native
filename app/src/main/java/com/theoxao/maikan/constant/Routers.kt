@@ -11,6 +11,8 @@ class Routers {
         const val ADD_BOOK = "read/read/add_book"
         const val BOOK_DETAIL = "read/read/detail"
         const val READ_LOG = "read/read/read_log"
+        const val READ_STAT = "read/read/read_stat"
+        const val EXCERPT_LIST = "read/excerpt/index"
         const val ISBN_SEARCH = "read/book/isbn/"
     }
 

@@ -22,7 +22,7 @@ class DateUtils {
             val hour = time / (60 * 60 * 1000)
             val minute = (time - hour * 60 * 60 * 1000) / (60 * 1000)
             val second = (time - hour * 60 * 60 * 1000 - minute * 60 * 1000) / 1000
-            return (if (hour == 0L) "00" else if (hour > 10) hour else "0$hour").toString() + "小时" + (if (minute == 0L) "00" else if (minute > 10) minute else "0$minute") + "分" + if (second == 0L) "00" else if (second > 10) second else "0$second" + "秒"
+            return (if (hour == 0L) "" else "${hour}小时") + (if (minute == 0L) "" else "${minute}分钟") + "${second}秒"
         }
     }
 }

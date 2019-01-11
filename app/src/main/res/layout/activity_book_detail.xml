@@ -27,6 +27,7 @@
                 android:layout_marginBottom="@dimen/dp_16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+            <!--detail-->
             <android.support.constraint.ConstraintLayout
                     android:id="@+id/book_detail"
                     android:layout_width="match_parent"
@@ -39,10 +40,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
+                <!--//book detail-->
                 <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
+                    <!--cover view-->
                     <ImageView
                             android:id="@+id/book_cover"
                             android:elevation="@dimen/dp_4"
@@ -55,7 +57,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"/>
-
+                    <!--name-->
                     <TextView
                             android:id="@+id/book_name"
                             android:layout_width="wrap_content"
@@ -70,7 +72,7 @@
                             android:textSize="@dimen/dp_16"
                             app:layout_constraintStart_toEndOf="@id/book_cover"
                             app:layout_constraintTop_toTopOf="parent"/>
-
+                    <!--author-->
                     <TextView
                             android:id="@+id/book_author"
                             android:layout_width="wrap_content"
@@ -93,7 +95,7 @@
                             android:layout_marginTop="@dimen/dp_6"
                             app:layout_constraintStart_toStartOf="@id/book_name"
                             app:layout_constraintTop_toBottomOf="@id/book_author"/>
-
+                    <!--introduction-->
                     <TextView
                             android:id="@+id/introduction_entry"
                             android:layout_width="wrap_content"
@@ -120,88 +122,160 @@
                             app:layout_constraintTop_toBottomOf="@id/introduction_entry"
                             app:layout_constraintStart_toStartOf="@id/book_name"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:corner_radius="@dimen/dp_8"/>
+                            app:corner_radius="@dimen/dp_4"/>
 
                 </android.support.constraint.ConstraintLayout>
 
 
             </android.support.constraint.ConstraintLayout>
 
-
+            <!--read stat-->
             <android.support.constraint.ConstraintLayout
+                    android:orientation="vertical"
                     android:id="@+id/read_stat_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="@dimen/dp_2"
-                    android:paddingStart="@dimen/dp_8"
-                    android:paddingEnd="@dimen/dp_8"
+                    android:padding="@dimen/dp_10"
                     android:background="@drawable/round_bg_white"
                     android:layout_margin="@dimen/dp_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/book_detail">
 
-                <android.support.constraint.ConstraintLayout
-                        android:id="@+id/recommend_title"
+                <LinearLayout
+                        android:id="@+id/linear3"
                         android:layout_width="match_parent"
+                        android:orientation="horizontal"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_8"
-                        android:background="@drawable/diviner_bottom"
-                        app:layout_constraintTop_toTopOf="parent">
-                    <ImageView android:layout_width="@dimen/dp_14" android:layout_height="@dimen/dp_14"
-                               android:id="@+id/recommend_logo"
-                               android:src="@drawable/ic_newbook_tags"
-                               app:layout_constraintStart_toStartOf="parent"
-                               app:layout_constraintTop_toTopOf="parent"
-                               app:layout_constraintBottom_toBottomOf="parent"
-                    />
-
-                    <TextView
-                            android:layout_width="0dp" android:layout_height="wrap_content"
-                            android:text="常用分类"
-                            android:textSize="@dimen/dp_14"
-                            android:layout_marginStart="@dimen/dp_4"
-                            android:textColor="@color/colorPrimary"
-                            app:layout_constraintStart_toEndOf="@id/recommend_logo"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:gravity="start"
-                    />
-
-                </android.support.constraint.ConstraintLayout>
-
-                <android.support.v7.widget.RecyclerView
-                        android:id="@+id/tag_recommend_recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/dp_4"
                         android:paddingBottom="@dimen/dp_4"
                         android:background="@drawable/diviner_bottom"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/recommend_title"/>
+                        android:baselineAligned="false">
+                    <!--progress-->
+                    <android.support.constraint.ConstraintLayout
+                            android:id="@+id/progress_view"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                        <ImageView
+                                android:id="@+id/progress_image"
+                                android:layout_width="@dimen/dp_20"
+                                android:layout_height="@dimen/dp_20"
+                                android:src="@drawable/ic_book_details_countdown"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+                        <TextView
+                                android:id="@+id/progress_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="阅读页数"
+                                android:gravity="start"
+                                android:layout_marginStart="@dimen/dp_6"
+                                android:textColor="@color/hint"
+                                android:textSize="@dimen/dp_12"
+                                app:layout_constraintStart_toEndOf="@id/progress_image"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                        />
+                        <TextView
+                                android:id="@+id/progress"
+                                android:textColor="@color/primaryText"
+                                android:textSize="@dimen/dp_14"
+                                android:layout_width="0dp"
+                                android:gravity="start"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintStart_toStartOf="@id/progress_title"
+                                app:layout_constraintTop_toBottomOf="@id/progress_title"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+                    </android.support.constraint.ConstraintLayout>
+                    <!--duration-->
+                    <android.support.constraint.ConstraintLayout
+                            android:id="@+id/remain_duration_view"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                        <ImageView
+                                android:id="@+id/remain_image"
+                                android:layout_width="@dimen/dp_20"
+                                android:layout_height="@dimen/dp_20"
+                                android:src="@drawable/ic_book_details_time"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+                        <TextView
+                                android:id="@+id/remain_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:textSize="@dimen/dp_12"
+                                android:textColor="@color/hint"
+                                android:text="累计阅读时间"
+                                android:layout_marginStart="@dimen/dp_6"
+                                app:layout_constraintStart_toEndOf="@id/remain_image"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+                        <TextView
+                                android:id="@+id/remain_duration"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/primaryText"
+                                android:gravity="start"
+                                android:textSize="@dimen/dp_14"
+                                app:layout_constraintStart_toStartOf="@id/remain_title"
+                                app:layout_constraintTop_toBottomOf="@id/remain_title"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+                    </android.support.constraint.ConstraintLayout>
 
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                          android:id="@+id/add_tag_hint"
-                          android:text="@string/add_tag_tip"
-                          android:textColor="@color/hint"
-                          android:textSize="@dimen/dp_12"
-                          android:gravity="center"
-                          android:padding="@dimen/dp_4"
-                          app:layout_constraintTop_toBottomOf="@id/tag_recommend_recycler_view"
-                />
+                </LinearLayout>
 
-                <include layout="@layout/add_tag_entry"
-                         android:layout_width="@dimen/dp_100"
-                         android:layout_height="@dimen/dp_36"
-                         android:layout_marginBottom="@dimen/dp_8"
-                         app:layout_constraintBottom_toBottomOf="parent"
-                         app:layout_constraintStart_toStartOf="parent"
-                         app:layout_constraintEnd_toEndOf="parent"
-                         app:layout_constraintTop_toBottomOf="@id/add_tag_hint"/>
-
+                <!--return info-->
+                <android.support.constraint.ConstraintLayout
+                        android:id="@+id/return_info_container"
+                        android:layout_width="0dp"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/linear3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                >
+                    <ImageView
+                            android:id="@+id/return_image"
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="@dimen/dp_20"
+                            android:src="@drawable/ic_book_details_borrow_info"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    <TextView
+                            android:id="@+id/return_title"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:textSize="@dimen/dp_12"
+                            android:textColor="@color/hint"
+                            android:text="借来的书"
+                            android:layout_marginStart="@dimen/dp_6"
+                            app:layout_constraintStart_toEndOf="@id/return_image"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+                    <TextView
+                            android:id="@+id/return_view"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primaryText"
+                            android:gravity="start"
+                            android:textSize="@dimen/dp_14"
+                            app:layout_constraintStart_toStartOf="@id/return_title"
+                            app:layout_constraintTop_toBottomOf="@id/return_title"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+                </android.support.constraint.ConstraintLayout>
             </android.support.constraint.ConstraintLayout>
 
+            <!--read log-->
             <android.support.constraint.ConstraintLayout
                     android:id="@+id/read_log_container"
                     android:layout_width="match_parent"
@@ -239,8 +313,11 @@
                             app:layout_constraintStart_toEndOf="@id/read_log_logo"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            android:gravity="start"
-                    />
+                            android:gravity="start"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
                 </android.support.constraint.ConstraintLayout>
 
                 <RelativeLayout android:layout_width="match_parent"
@@ -258,6 +335,7 @@
 
             </android.support.constraint.ConstraintLayout>
 
+            <!--excerpt-->
             <android.support.constraint.ConstraintLayout
                     android:id="@+id/excerpt_container"
                     android:layout_width="match_parent"
@@ -282,7 +360,7 @@
                             android:id="@+id/excerpt_logo"
                             android:layout_width="@dimen/dp_14"
                             android:layout_height="@dimen/dp_14"
-                            android:src="@drawable/ic_book_details_reading_record"
+                            android:src="@drawable/ic_book_details_notes"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -290,7 +368,7 @@
 
                     <TextView
                             android:layout_width="0dp" android:layout_height="wrap_content"
-                            android:text="阅读进度"
+                            android:text="图书摘录"
                             android:textSize="@dimen/dp_14"
                             android:layout_marginStart="@dimen/dp_4"
                             android:textColor="@color/colorPrimary"
